@@ -1,0 +1,15 @@
+{
+    "name": "pc/strategy",
+    "autoload": {
+        "psr-4": {
+            "Strategy\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "JelloMangune",
+            "email": "mangune.jello@auf.edu.ph"
+        }
+    ],
+    "require": {}
+}
