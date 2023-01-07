@@ -36,5 +36,36 @@ class Application
         $order->setPaymentMethod($cash_on_delivery);
         $order->payInvoice();
         
+        echo "\n ************************************************* \n\n";
+
+        $cart2 = new ShoppingCart();
+        $cart2->addItem($nami,1);
+        $cart2->addItem($zoro,1);
+        $cart2->addItem($luffy,1);
+
+        $order2 = new Order($customer, $cart2);
+
+        $pdf_invoice = new PDFInvoice();
+        $order2->setInvoiceGenerator($pdf_invoice);
+        $pdf_invoice->generate($order2);
+
+        $paypal_payment = new PaypalPayment('mangune.jello@auf.edu.ph', '12345678');
+        $order2->setPaymentMethod($paypal_payment);
+        $order2->payInvoice();
+
+        echo "\n ************************************************* \n\n";
+
+        $customer2 = new Customer('John Doe', '170 Balasticio, Turo Magalang', 'doe.john@auf.edu.ph');
+
+        $cart3 = new ShoppingCart();
+        $cart3->addItem($luffy, 10);
+
+        $order3 = new Order($customer2, $cart3);
+        $order3->setInvoiceGenerator($text_invoice);
+        $text_invoice->generate($order3);
+
+        $credit_card_payment = new CreditCardPayment('John Doe', '33333333', '1414', '01/80');
+        $order3->setPaymentMethod($credit_card_payment);
+        $order3->payInvoice();
     }
 }
